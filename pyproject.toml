@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "city-poster"
+version = "0.1.0"
+description = ""
+authors = ["Roman Slyusar <slyusarrv@yandex.ru>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.10"
+psycopg2-binary = "^2.9.5"
+flake8 = "^6.0.0"
+isort = "^5.11.4"
+pillow = "^9.4.0"
+python-dotenv = "^0.21.0"
+django = "3.2.16"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

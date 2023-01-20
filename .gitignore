@@ -1,0 +1,19 @@
+### IDE ###
+.idea/
+
+### Python ###
+__pycache__/
+
+### ENV ###
+.env
+.env.local
+.env.production
+
+### Django ###
+*.pyc
+
+### BD ###
+*.sqlite3
+
+### Other ###
+

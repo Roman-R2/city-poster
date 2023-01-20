@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  web-app:
+    build:
+      context: ./
+      dockerfile: ./docker/development/web-app.dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./city-poster:/web-app/city-poster
+    env_file:
+      - .env
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:14.6-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-volume:
