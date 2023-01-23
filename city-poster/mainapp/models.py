@@ -11,7 +11,7 @@ class CompanyProfile(models.Model):
         return f"{self.name} ({self.type})"
 
 
-class EventType(models.Model):
+class EventCategory(models.Model):
     name = models.CharField(max_length=512, verbose_name='Тип события')
 
     def __str__(self):

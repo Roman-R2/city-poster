@@ -2,7 +2,11 @@ include .env
 export
 
 # --- Common section ----------------------
+rm-migrations-dirs:
+	rm -rf city-poster/mainapp/migrations
 
+clean-start-for-development:rm-migrations-dirs docker-down-remove-volumes docker-build-up \
+makemigrations migrate createsuperuser
 # --------------------------------------------
 
 # --- Poetry section ----------------------

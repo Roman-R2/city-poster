@@ -11,9 +11,9 @@ __pycache__/
 
 ### Django ###
 *.pyc
+city-poster/mainapp/migrations
 
 ### BD ###
 *.sqlite3
 
 ### Other ###
-
