@@ -7,7 +7,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>Title</title>
+    <title>
+        {% block title-text %}
+            Афиша Ханты-Мансийска
+        {% endblock %}
+    </title>
 
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
@@ -16,21 +20,30 @@
     <!-- Favicons -->
 
 </head>
-<body>
 
+<body class="d-flex flex-column h-100">
 
-{% block header %}
+<header>
+    {% block header %}
+    {% endblock %}
+
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+    <div class="container">
+        {% block site_content %}
+        {% endblock %}
+    </div>
+</main>
+
+{% block footer %}
 {% endblock %}
 
-<main>
-    {% block site_content %}
-    {% endblock %}
-
-    {% block footer %}
-    {% endblock %}
-</main>
 
 <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 
+
 </body>
+
 </html>

@@ -36,11 +36,11 @@ makemigrations:
 	docker-compose run --rm web-app sh -c "python manage.py makemigrations"
 
 createsuperuser:
-	docker-compose run --rm web-app sh -c "python manage.py createsuperuser"
+	docker-compose run --rm web-app sh -c "python manage.py createsuperuser --no-input"
 # --------------------------------------------
 
 # --- Code section ----------------------
 check-code:
-	isort agile_hh/ candidateapp/ authapp/ companyapp/ mainapp/
-	flake8 --extend-ignore E501,F401 agile_hh/ candidateapp/ authapp/ companyapp/ mainapp/
+	isort city-poster/app/ city-poster/mainapp/
+	flake8 --extend-ignore E501,F401 city-poster/app/ city-poster/mainapp/
 # --------------------------------------------
