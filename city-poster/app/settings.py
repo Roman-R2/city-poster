@@ -13,18 +13,23 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environments from .env file
+load_dotenv(BASE_DIR.parent / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=cpuctbi&-c8@8&35q&)frwqdz#%-#w2f^aus1-2e+x@nkk9wz'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost ").split(" ")
 
 # Application definition
 
@@ -40,7 +45,7 @@ INSTALLED_APPS = [
     # Third-party apps
 
     # Our apps
-    'mainapp',
+    'mainapp.apps.MainappConfig',
 ]
 
 MIDDLEWARE = [
@@ -82,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': os.getenv("DB_ENGINE", "django.db.backends.sqlite3"),
         'NAME': os.getenv('DB_NAME', BASE_DIR / "db.sqlite3"),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASS'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'USER': os.getenv('DB_USER', "user"),
+        'PASSWORD': os.getenv('DB_PASS', "password"),
+        'HOST': os.getenv('DB_HOST', "localhost"),
+        'PORT': os.getenv('DB_PORT', "5432"),
     }
 }
 
@@ -141,3 +146,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 MEDIA_POSTER_IMAGE_FOLDER = 'posters'
+
+# Time for start event schedule harvest
+UGRA_CLASSIC_HARVEST_TIME = os.getenv('UGRA_CLASSIC_HARVEST_TIME', default="02:00")

@@ -30,6 +30,9 @@ docker-build-up:
 docker-logs:
 	docker-compose -f docker-compose.yml logs -f
 
+web-app-cli:
+	docker exec -ti ${PYTHON_CONTAINER_NAME} sh
+
 # --------------------------------------------
 
 # --- Django section ----------------------
@@ -37,7 +40,7 @@ migrate:
 	docker-compose run --rm web-app sh -c "python manage.py migrate"
 
 makemigrations:
-	docker-compose run --rm web-app sh -c "python manage.py makemigrations"
+	docker-compose run --rm web-app sh -c "python manage.py makemigrations mainapp"
 
 createsuperuser:
 	docker-compose run --rm web-app sh -c "python manage.py createsuperuser --no-input"
@@ -45,6 +48,6 @@ createsuperuser:
 
 # --- Code section ----------------------
 check-code:
-	isort city-poster/app/ city-poster/mainapp/
-	flake8 --extend-ignore E501,F401 city-poster/app/ city-poster/mainapp/
+	isort city-poster/app/ city-poster/mainapp/ city-poster/event_handlers/
+	flake8 --extend-ignore E501,F401 city-poster/app/ city-poster/mainapp/ city-poster/event_handlers/
 # --------------------------------------------

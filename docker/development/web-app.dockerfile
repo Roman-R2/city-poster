@@ -22,10 +22,15 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install
 
+
 COPY city-poster /web-app/city-poster
+COPY .env /web-app
+COPY Makefile /web-app
+COPY poetry.lock /web-app
+COPY pyproject.toml /web-app
 WORKDIR /web-app/city-poster
 
-EXPOSE 8000
+#EXPOSE 8000
 
 RUN adduser --disabled-password service-user
 
