@@ -14,6 +14,16 @@ WORKDIR /temp
 RUN apk update \
     && apk add postgresql-client build-base postgresql-dev gcc python3-dev musl-dev
 
+# Add locales in alpine image
+ENV MUSL_LOCALE_DEPS cmake make musl-dev gcc gettext-dev libintl
+ENV MUSL_LOCPATH /usr/share/i18n/locales/musl
+RUN apk add --no-cache \
+    $MUSL_LOCALE_DEPS \
+    && unzip musl-locales-master.zip \
+      && cd musl-locales-master \
+      && cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install \
+      && cd .. && rm -r musl-locales-master
+
 RUN apk add make
 
 # Install dependencies

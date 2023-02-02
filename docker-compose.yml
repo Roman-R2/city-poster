@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   web-app:
-    container_name: ${PYTHON_CONTAINER_NAME}
+    container_name: ${WEB_PYTHON_CONTAINER_NAME}
     build:
       context: ./
       dockerfile: ./docker/development/web-app.dockerfile
@@ -15,6 +15,23 @@ services:
       - .env
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - database
+
+  parser-app:
+    container_name: ${PARSER_PYTHON_CONTAINER_NAME}
+    build:
+      context: ./
+      dockerfile: ./docker/development/parser-app.dockerfile
+#    restart: always
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./event-parser:/web-app/event-parser
+    env_file:
+      - .env
+    command: >
+      sh -c "python parsers_launcher.py"
     depends_on:
       - database
 

@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environments from .env file
-load_dotenv(BASE_DIR.parent / '.env')
+load_dotenv(BASE_DIR.parent / os.getenv('DOT_ENV_FILENAME', '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Our apps
     'mainapp.apps.MainappConfig',
+    'eventhandlersapp.apps.EventhandlersappConfig',
 ]
 
 MIDDLEWARE = [
@@ -146,6 +147,3 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 MEDIA_POSTER_IMAGE_FOLDER = 'posters'
-
-# Time for start event schedule harvest
-UGRA_CLASSIC_HARVEST_TIME = os.getenv('UGRA_CLASSIC_HARVEST_TIME', default="02:00")

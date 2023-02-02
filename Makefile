@@ -6,7 +6,7 @@ rm-migrations-dirs:
 	rm -rf city-poster/mainapp/migrations
 
 clean-start-for-development:rm-migrations-dirs docker-down-remove-volumes docker-build-up \
-makemigrations migrate createsuperuser
+makemigrations migrate createsuperuser run-starting-commands
 # --------------------------------------------
 
 # --- Poetry section ----------------------
@@ -30,9 +30,11 @@ docker-build-up:
 docker-logs:
 	docker-compose -f docker-compose.yml logs -f
 
+parser-app-logs:
+	docker-compose -f docker-compose.yml logs -f parser-app
+
 web-app-cli:
 	docker exec -ti ${PYTHON_CONTAINER_NAME} sh
-
 # --------------------------------------------
 
 # --- Django section ----------------------
@@ -44,10 +46,14 @@ makemigrations:
 
 createsuperuser:
 	docker-compose run --rm web-app sh -c "python manage.py createsuperuser --no-input"
+
+run-starting-commands:
+	docker-compose run --rm web-app sh -c "python manage.py add-initial-event-categorys"
+	docker-compose run --rm web-app sh -c "python manage.py add-initial-event-company-profile"
 # --------------------------------------------
 
 # --- Code section ----------------------
 check-code:
-	isort city-poster/app/ city-poster/mainapp/ city-poster/event_handlers/
-	flake8 --extend-ignore E501,F401 city-poster/app/ city-poster/mainapp/ city-poster/event_handlers/
+	isort city-poster/app/ city-poster/mainapp/ event-parser/
+	flake8 --extend-ignore E501,F401 city-poster/app/ city-poster/mainapp/ event-parser/
 # --------------------------------------------
