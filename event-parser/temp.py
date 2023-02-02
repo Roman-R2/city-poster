@@ -7,8 +7,8 @@ print(locale.locale_alias)
 
 print(f"{locale.LC_ALL=}")
 
-string = "3 Февраля 2023"
+string = "24 март202300:00"
 
-result = datetime.strptime(string, "%d %B %Y")
+result = datetime.strptime(string, "%d %B%Y%H:%M")
 
 print(result)

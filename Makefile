@@ -52,6 +52,12 @@ run-starting-commands:
 	docker-compose run --rm web-app sh -c "python manage.py add-initial-event-company-profile"
 # --------------------------------------------
 
+# --- Tests section ----------------------
+parser-app-tests:
+	docker-compose run --rm parser-app sh -c "python -m unittest discover -v -s tests -p '*_test.py'"
+
+# --------------------------------------------
+
 # --- Code section ----------------------
 check-code:
 	isort city-poster/app/ city-poster/mainapp/ event-parser/
