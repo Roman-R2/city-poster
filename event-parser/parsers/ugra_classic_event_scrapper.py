@@ -3,10 +3,9 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime
 
-from lxml.html import fromstring
-
 from abstractions import AbstractScrapper
-from services import MonthTitleReplace, HTTPResponse, RequestHeaders
+from lxml.html import fromstring
+from services import HTTPResponse, MonthTitleReplace, RequestHeaders
 
 
 @dataclass

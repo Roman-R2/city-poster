@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from mainapp.models import (CompanyProfile, Event, EventCategory,
                             EventDatetime, EventTags)
 

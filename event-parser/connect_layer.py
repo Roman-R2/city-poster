@@ -1,7 +1,8 @@
-import settings
 from sqlalchemy import Column, Integer, String, create_engine, select
 from sqlalchemy.orm import Session, registry
 from sqlalchemy.sql import Select
+
+import settings
 
 mapper_registry = registry()
 Base = mapper_registry.generate_base()

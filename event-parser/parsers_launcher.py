@@ -2,6 +2,7 @@ import datetime
 import time
 
 import schedule
+
 import settings
 
 if __name__ == '__main__':

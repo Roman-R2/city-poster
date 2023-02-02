@@ -1,9 +1,9 @@
 import sys
-
 import unittest
 from datetime import datetime
 
-from parsers.ugra_classic_event_scrapper import UgraClassicEventScrapperToolsMixin
+from parsers.ugra_classic_event_scrapper import \
+    UgraClassicEventScrapperToolsMixin
 
 
 class TestStringMethods(unittest.TestCase):

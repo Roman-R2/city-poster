@@ -59,7 +59,11 @@ parser-app-tests:
 # --------------------------------------------
 
 # --- Code section ----------------------
-check-code:
-	isort city-poster/app/ city-poster/mainapp/ event-parser/
-	flake8 --extend-ignore E501,F401 city-poster/app/ city-poster/mainapp/ event-parser/
+lint-code:
+	docker-compose run --rm web-app sh -c "isort app/ mainapp/"
+	docker-compose run --rm web-app sh -c "flake8 --extend-ignore E501,F401 app/ mainapp/"
+	docker-compose run --rm parser-app sh -c "isort ./"
+	docker-compose run --rm parser-app sh -c "flake8 --extend-ignore E501,F401 ./"
 # --------------------------------------------
+
+check-code: lint-code parser-app-tests
